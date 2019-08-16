@@ -5,6 +5,8 @@ import org.bukkit.inventory.ItemStack;
 public interface StateUpgrade {
     int place();
 
+    int maxLevel();
+
     ItemStack item();
 
     int getLevel();

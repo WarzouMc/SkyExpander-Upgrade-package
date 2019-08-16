@@ -39,7 +39,7 @@ public class UpgradeGetter {
 
     /*
      * * * * * * * * *
-     * * @getItem() * *
+     * * getItem() * *
      * * * * * * * * *
      */
 
@@ -78,13 +78,5 @@ public class UpgradeGetter {
         ConfigSetup.BaseConfig baseConfig = new ConfigSetup.BaseConfig(main.getConfig(), main);
         return baseConfig.getMoney(playerName());
     }
-
-
-    /** Set id (place) */
-
-    /*public void addRegisterIdMap(StateUpgrade stateUpgrade){
-        byId.put(0, this.ENDERCHEST);
-        byId.put(1, this.REWARDCHEST);
-    }*/
 
 }

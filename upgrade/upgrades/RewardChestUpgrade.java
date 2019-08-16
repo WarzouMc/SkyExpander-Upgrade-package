@@ -34,6 +34,11 @@ public class RewardChestUpgrade extends ConfigSetup.ChestConfig implements State
     }
 
     @Override
+    public int maxLevel(){
+        return 6;
+    }
+
+    @Override
     public ItemStack item() {
         ItemStack itemStack = new ItemStack(Material.TRIPWIRE_HOOK);
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -41,7 +46,7 @@ public class RewardChestUpgrade extends ConfigSetup.ChestConfig implements State
         String displayName = "§5§oRewardChest";
         List<String> lores = new ArrayList<>();
 
-        if (getLevel() == 6){
+        if (getLevel() == maxLevel()){
             lores.add("§bMax");
         }else {
             lores.add("§eNiveau actuelle §f: §9" + getLevel());

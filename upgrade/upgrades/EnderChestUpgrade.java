@@ -4,7 +4,9 @@ import fr.WarzouMc.MonaiServGroup.Main;
 import fr.WarzouMc.MonaiServGroup.upgrade.StateUpgrade;
 import fr.WarzouMc.MonaiServGroup.utils.fileConfiguration.config.ConfigSetup;
 import fr.WarzouMc.MonaiServGroup.utils.stringTransformer.NumbersSeparator;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -32,6 +34,11 @@ public class EnderChestUpgrade extends ConfigSetup.ChestConfig implements StateU
     }
 
     @Override
+    public int maxLevel(){
+        return 6;
+    }
+
+    @Override
     public ItemStack item(){
         ItemStack itemStack = new ItemStack(Material.ENDER_CHEST);
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -39,7 +46,7 @@ public class EnderChestUpgrade extends ConfigSetup.ChestConfig implements StateU
         String displayName = "§5§oEnderChest";
         List<String> lores = new ArrayList<>();
 
-        if (getLevel() == 6){
+        if (getLevel() == maxLevel()){
             lores.add("§bMax");
         }else {
             lores.add("§eNiveau actuelle §f: §9" + getLevel());
@@ -90,6 +97,18 @@ public class EnderChestUpgrade extends ConfigSetup.ChestConfig implements StateU
 
     @Override
     public void action(){
-
+        Player player = Bukkit.getPlayer(playerName);
+        ConfigSetup.BaseConfig baseConfig = new ConfigSetup.BaseConfig(main.getConfig(), main);
+        if (getLevel() < maxLevel()){
+            if (money >= getPrice()){
+                if (prestige >= getPrestige()){
+                    baseConfig.rvmMoney(getPrice(), playerName);
+                    addEnderChestLevel(playerName, 1);
+                    player.closeInventory();
+                }
+            }
+        }else {
+            player.closeInventory();
+        }
     }
 }
